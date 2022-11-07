@@ -1,5 +1,19 @@
 import axios from "axios";
 
+// Register new user
+export const registerNewUser = async (newUser) => {
+  const { data } = await axios.post(`${process.env.REACT_APP_BASE_URL}/auth/register`, newUser);
+
+  return data;
+};
+
+// Login user
+export const login = async (userDetails) => {
+  const { data } = await axios.post(`${process.env.REACT_APP_BASE_URL}/auth/login`, userDetails);
+
+  return data;
+};
+
 // Get all books sorted and filtered
 export const getBooks = async (token, sortBy, sortType, selectedGenres, offset) => {
   try {
@@ -58,8 +72,6 @@ export const getPublishers = async (token, sortBy, sortType, address, offset) =>
 // Delete request
 export const deleteRequest = async (token, id, pathname) => {
   const yes = confirm("Are you sure you want to delete?");
-
-  console.log(`${process.env.REACT_APP_BASE_URL}/${pathname}/${id}`);
 
   if (!yes) return;
 

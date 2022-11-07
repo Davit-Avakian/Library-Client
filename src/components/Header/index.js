@@ -30,7 +30,7 @@ const Header = () => {
           <NavLink
             to={"/publishers"}
             style={({ isActive }) => (isActive ? { borderBottom: "3px solid black" } : {})}>
-            Publisher
+            Publishers
           </NavLink>
         </NavContainer>
 

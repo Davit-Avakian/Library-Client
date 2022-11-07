@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import {
   ErrorMessage,
   LoginContainer,
@@ -12,6 +11,7 @@ import {
   SuccessMessage
 } from "./index.styles";
 import { AuthContext } from "../Contexts/AuthContextProvider";
+import { registerNewUser, login } from "../../requests";
 
 /**
  *  Creates Login component
@@ -46,8 +46,7 @@ const Login = ({ register }) => {
     setSuccess("");
 
     try {
-      // eslint-disable-next-line no-undef
-      const { data } = await axios.post(`${process.env.REACT_APP_BASE_URL}/auth/login`, {
+      const data = await login({
         email,
         password
       });
@@ -75,8 +74,7 @@ const Login = ({ register }) => {
     setSuccess("");
 
     try {
-      // eslint-disable-next-line no-undef
-      const { data } = await axios.post(`${process.env.REACT_APP_BASE_URL}/auth/register`, {
+      const data = await registerNewUser({
         username,
         email,
         role: "customer",

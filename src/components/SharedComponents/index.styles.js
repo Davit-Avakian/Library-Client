@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const SortFilterContainer = styled.div`
   background-color: transparent;
-  width: 15%;
+  min-width: 15%;
   height: fit-content;
   padding: 2rem 0;
   border: 1px solid black;
@@ -14,6 +14,11 @@ export const SortFilterContainer = styled.div`
     border-bottom: 1px solid black;
     padding-bottom: 1rem;
     margin-bottom: 2rem;
+  }
+
+  @media (max-width: 600px) {
+    padding: 0;
+    margin-left: 1rem;
   }
 `;
 
@@ -63,6 +68,14 @@ export const FilterDetails = styled.div`
       display: block;
     }
   }
+
+  @media (max-width: 600px) {
+    select {
+      width: 100%;
+      margin-left: 0;
+      padding: 0;
+    }
+  }
 `;
 
 export const SearchButton = styled.button`
@@ -83,6 +96,10 @@ export const ListContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 5%;
+
+  @media (max-width: 1000px) {
+    justify-content: center;
+  }
 `;
 
 export const ListItem = styled.div`
@@ -90,7 +107,7 @@ export const ListItem = styled.div`
   padding: 1rem 0;
 
   height: 300px;
-  width: 20%;
+  width: 250px;
   border: 1px solid black;
   border-radius: 1rem;
   margin-bottom: 1.5rem;
@@ -104,6 +121,11 @@ export const ListItem = styled.div`
     display: block;
     margin-top: 1rem;
     font-size: 1.1rem;
+  }
+
+  @media (max-width: 500px) {
+    height: 250px;
+    width: 200px;
   }
 `;
 
@@ -123,4 +145,9 @@ export const NotFound = styled.span`
   width: 250px;
   margin: 4rem auto;
   font-size: 2rem;
+
+  @media (max-width: 500px) {
+    width: 150px;
+    font-size: 1rem;
+  }
 `;

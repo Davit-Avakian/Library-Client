@@ -14,7 +14,7 @@ export const LoginContainer = styled.div`
 export const LoginFormContainer = styled.div`
   background-color: #fff;
   min-width: 40%;
-  height: 60%;
+  min-height: 60%;
   background: #fff;
   padding: 30px;
   border-radius: 15px;
@@ -22,9 +22,18 @@ export const LoginFormContainer = styled.div`
 
   h1 {
     background-color: transparent;
-    width: 30%;
+    width: 5rem;
+    min-width: fit-content;
     margin: 0 auto;
     font-size: 35px;
+  }
+
+  @media (max-width: 1000px) {
+    width: 80%;
+  }
+
+  @media (max-width: 550px) {
+    width: 95%;
   }
 `;
 
@@ -49,6 +58,10 @@ export const NavLogin = styled.button`
   line-height: 48px;
   margin-right: 0.5rem;
   cursor: pointer;
+
+  @media (max-width: 500px) {
+    font-size: 1rem;
+  }
 `;
 
 export const NavSignup = styled(NavLogin)`
@@ -78,7 +91,11 @@ export const LoginForm = styled.form`
     border-radius: 15px;
     border: 1px solid lightgrey;
     border-bottom-width: 2px;
-    font-size: 17px;
+    font-size: 1.2rem;
+
+    @media (max-width: 500px) {
+      font-size: 1rem;
+    }
   }
 
   button {
