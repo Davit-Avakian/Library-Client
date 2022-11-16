@@ -14,6 +14,15 @@ export const login = async (userDetails) => {
   return data;
 };
 
+// Get all genres
+export const getGenres = async (token) => {
+  const {
+    data: { data }
+  } = await axios.get(`${process.env.REACT_APP_BASE_URL}/genres`, getHeader(token));
+
+  return data;
+};
+
 // Get all books sorted and filtered
 export const getBooks = async (token, sortBy, sortType, selectedGenres, offset) => {
   try {
@@ -36,7 +45,13 @@ export const getBooks = async (token, sortBy, sortType, selectedGenres, offset) 
 };
 
 // Get all authors sorted and filtered
-export const getAuthors = async (token, sortBy, sortType, gender, offset) => {
+export const getAuthors = async (
+  token,
+  sortBy = "first_name",
+  sortType = "asc",
+  gender = "all",
+  offset = 0
+) => {
   try {
     // request all data
     const { data } = await axios.get(
@@ -53,7 +68,13 @@ export const getAuthors = async (token, sortBy, sortType, gender, offset) => {
 };
 
 // Get all publishers sorted and filtered
-export const getPublishers = async (token, sortBy, sortType, address, offset) => {
+export const getPublishers = async (
+  token,
+  sortBy = "establishment_date",
+  sortType = "asc",
+  address = "all",
+  offset = 0
+) => {
   try {
     // request data
     const { data } = await axios.get(
@@ -84,8 +105,17 @@ export const deleteRequest = async (token, id, pathname) => {
   }
 };
 
+// Add request
+export const addRequest = async (token, data, pathname) => {
+  try {
+    await axios.post(`${process.env.REACT_APP_BASE_URL}/${pathname}`, data, getHeader(token));
+  } catch (error) {
+    console.log(error.response.data.message);
+  }
+};
+
 // request header
-export const getHeader = (token) => {
+const getHeader = (token) => {
   return {
     headers: {
       Authorization: `Bearer ${token}`

@@ -79,19 +79,32 @@ export const FilterDetails = styled.div`
 `;
 
 export const SearchButton = styled.button`
-  cursor: pointer;
-  border: none;
-  width: 70%;
   background-color: lightgreen;
   border-radius: 10px;
-  padding: 1rem;
+  border: none;
+  cursor: pointer;
   margin-left: 2rem;
   margin-top: 1rem;
+  padding: 1rem;
+  width: 70%;
+`;
+
+export const AddButton = styled.button`
+  background-color: lightgreen;
+  border-radius: 0.5rem;
+  border: none;
+  color: #ffff;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 0.2rem;
+  padding: 1rem;
+  position: absolute;
+  right: 5%;
 `;
 
 export const ListContainer = styled.div`
   width: 100%;
-  margin-top: 2rem;
+  margin-top: 4rem;
 
   display: flex;
   flex-wrap: wrap;

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { deleteRequest, getPublishers } from "../../requests";
 import {
+  AddButton,
   DeleteButton,
   FilterContainer,
   FilterDetails,
@@ -17,6 +18,7 @@ import Pagination from "..//Pagination";
 import { PublishersContainer } from "./index.styles";
 import { AuthContext } from "../Contexts/AuthContextProvider";
 import deleteImg from "../../assets/images/deleteImage.png";
+import PopUp from "../PopUp";
 
 /**
  *  Creates Publishers component
@@ -41,6 +43,9 @@ const Publishers = () => {
   // stores offset value
   const [offset, setOffset] = useState(0);
 
+  // boolean for showing or hiding popup
+  const [showPopup, setShowPopup] = useState(false);
+
   // stores total count of data for pagination
   const [totalCount, setTotalCount] = useState(null);
 
@@ -60,6 +65,16 @@ const Publishers = () => {
 
   return (
     <PublishersContainer>
+      {role === "publisher" && (
+        <AddButton
+          onClick={(e) => {
+            e.stopPropagation();
+            setShowPopup(true);
+          }}>
+          Add Publisher
+        </AddButton>
+      )}
+      {showPopup && <PopUp type={"Publisher"} setShowPopup={setShowPopup} />}
       <SortFilterContainer>
         <SortContainer>
           <h2>Sort</h2>

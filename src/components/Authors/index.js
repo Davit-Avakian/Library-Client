@@ -3,6 +3,7 @@ import { deleteRequest, getAuthors } from "../../requests";
 import { AuthContext } from "../Contexts/AuthContextProvider";
 import Pagination from "../Pagination";
 import {
+  AddButton,
   DeleteButton,
   FilterContainer,
   FilterDetails,
@@ -17,6 +18,7 @@ import {
 } from "../SharedComponents/index.styles";
 import { AuthorsContainer } from "./index.styles";
 import deleteImg from "../../assets/images/deleteImage.png";
+import PopUp from "../PopUp";
 
 /**
  *  Creates Authors component
@@ -44,6 +46,9 @@ const Authors = () => {
   // stores total count for paginations
   const [totalCount, setTotalCount] = useState(null);
 
+  // boolean value for showing or hiding popup
+  const [showPopup, setShowPopup] = useState(false);
+
   // gets token and role from context
   const { token, role } = useContext(AuthContext);
 
@@ -60,6 +65,17 @@ const Authors = () => {
 
   return (
     <AuthorsContainer>
+      {role === "publisher" && (
+        <AddButton
+          onClick={(e) => {
+            e.stopPropagation();
+
+            setShowPopup(true);
+          }}>
+          Add Author
+        </AddButton>
+      )}
+      {showPopup && <PopUp type={"Author"} setShowPopup={setShowPopup} />}
       <SortFilterContainer>
         <SortContainer>
           <h2>Sort</h2>

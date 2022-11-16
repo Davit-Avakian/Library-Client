@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
+  AddButton,
   DeleteButton,
   FilterContainer,
   FilterDetails,
@@ -13,11 +14,11 @@ import {
   SortFilterContainer
 } from "../SharedComponents/index.styles";
 import { BooksContainer } from "./index.styles";
-import axios from "axios";
-import { getHeader, getBooks, deleteRequest } from "../../requests";
+import { getBooks, deleteRequest, getGenres } from "../../requests";
 import Pagination from "../Pagination";
 import { AuthContext } from "../Contexts/AuthContextProvider";
 import deleteImg from "../../assets/images/deleteImage.png";
+import PopUp from "../PopUp";
 
 /**
  *  Creates Books component
@@ -48,6 +49,9 @@ const Books = () => {
   // stores total count of data for pagination
   const [totalCount, setTotalCount] = useState(null);
 
+  // boolean value for showing or hiding popup
+  const [showPopup, setShowPopup] = useState(false);
+
   // gets token and role from context
   const { token, role } = useContext(AuthContext);
 
@@ -55,9 +59,7 @@ const Books = () => {
     (async () => {
       try {
         // fetches all genres
-        const {
-          data: { data: allGenres }
-        } = await axios.get(`${process.env.REACT_APP_BASE_URL}/genres`, getHeader(token));
+        const allGenres = await getGenres(token);
 
         const genresObj = allGenres.reduce((acc, curr) => {
           acc[curr.id] = curr.name;
@@ -90,6 +92,17 @@ const Books = () => {
 
   return (
     <BooksContainer>
+      {showPopup && <PopUp setShowPopup={setShowPopup} type={"Book"} />}
+      {role === "publisher" && (
+        <AddButton
+          onClick={(e) => {
+            e.stopPropagation();
+
+            setShowPopup(true);
+          }}>
+          Add Book
+        </AddButton>
+      )}
       <SortFilterContainer>
         <SortContainer>
           <h2>Sort</h2>
